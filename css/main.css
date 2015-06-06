@@ -1,5 +1,5 @@
 .row {
-  width: 100vw;
+  max-width: 100vw;
   margin: -0.5em;
   display: flex;
   flex-flow: row wrap;
@@ -53,19 +53,24 @@
   width: 100%;
 }
 
+@font-face{
+  font-family: "Dragon";
+  src: url(../font/dragon-alphabet.ttf);
+}
+
 .intro {
-  width: 100vw;
+  background-color: #000;
   height: 100vh;
 }
 
 .intro-padding {
   width: 100%;
-  height: 10%;
+  height: 5%;
   background-color: #000;
 }
 
 .intro-canvas-image {
-  height: 50%;
+  height: 55%;
   background: #000 url("../img/logo-large.png") no-repeat 30%;
   background-size: contain;
 }
@@ -74,11 +79,51 @@
   background-color: #000;
 }
 
+.intro-before {
+  font: 300 1.2em "Dosis", sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: right;
+  margin: 0;
+}
+
 .intro-name {
   font: 300 1.5em "Dosis", sans-serif;
   color: #fff;
   text-transform: uppercase;
   text-align: right;
+  margin: auto;
+}
+
+.intro-role {
+  font: 300 1.15em "Dosis", sans-serif;
+  color: #ddd;
+  text-transform: capitalize;
+  text-align: right;
+  margin: 0 auto;
+}
+
+.intro-menu-list {
+  margin: 1em auto;
+  text-align: right;
+  list-style: none;
+  text-transform: uppercase;
+}
+
+.intro-menu-link {
+  font: 400 1.25em "Dosis", sans-serif;
+  transition: font-weight 0.3s, font-size 0.3s;
+  color: #fff;
+  text-decoration: none;
+}
+
+.intro-menu-link:hover {
+  text-decoration: none;
+}
+
+.intro-menu-link:hover {
+  font-size: 1.5em;
+  font-weight: 500;
 }
 
 #intro-canvas {
@@ -86,12 +131,84 @@
   height: 40%;
 }
 
+.dovahkiin-title {
+  margin: auto;
+  font: 3em "Dragon", sans-serif;
+  color: #fff;
+}
+
+.page-content {
+  margin: 1em;
+  min-height: 100vh;
+}
+
+.page-title {
+  margin: 0 auto;
+  font: 500 2em "Dosis", sans-serif;
+  text-align: center;
+  color: #222;
+}
+
+.dovah-title {
+  margin: 0 auto;
+  font: 1.5em "Dragon", sans-serif;
+  text-align: center;
+  color: #222;
+}
+
 /* Responsive */
 
 @media screen and (min-width: 500px) {
+  .intro-before {
+    margin: 0 1em;
+  }
   .intro-name {
     font-weight: 400;
-    font-size: 2.5em;
+    font-size: 1.75em;
+    margin: 0;
+  }
+  .intro-role {
+    margin: 0 1.25em;
+  }
+  .intro-menu-link {
+    font-size: 1.45em;
     padding: 0 1em;
+  }
+  .intro-menu-link:hover {
+    font-size: 1.8em;
+  }
+  .dovahkiin-title {
+    font-size: 5em;
+  }
+  .page-title {
+    font-size: 3em;
+  }
+  .dovah-title {
+    font-size: 2.75em;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .intro-before {
+    margin: 0 1em;
+  }
+  .intro-name {
+    font-weight: 400;
+    font-size: 2.35em;
+  }
+  .intro-menu-link {
+    font-size: 1.7em;
+  }
+  .intro-menu-link:hover {
+    font-size: 1.95em;
+  }
+  .dovahkiin-title {
+    font-size: 5em;
+  }
+  .page-title {
+    font-size: 3em;
+  }
+  .dovah-title {
+    font-size: 2.75em;
   }
 }

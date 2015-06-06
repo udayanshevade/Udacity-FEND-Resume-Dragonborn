@@ -33,7 +33,17 @@ $(function() {
     // Once the callback is arranged then set the source of the image
     imageObj.src = "img/fog.png";
 
-    var fogYUpperLimit = (canvasHeight/2.5);
+    var fogYUpperLimit;
+
+    if ($(window).width() <= 500) {
+        fogYUpperLimit = (canvasHeight/1.5);
+    }
+    else if (500 < $(window).width() <= 1200) {
+        fogYUpperLimit = (canvasHeight/2);
+    }
+    else if (1200 < $(window).width()) {
+        fogYUpperLimit = (canvasHeight/1.1);
+    }
     var fogYLowerLimit = (canvasHeight);
 
     // A function to create a particle object.
