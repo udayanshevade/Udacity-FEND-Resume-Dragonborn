@@ -66,9 +66,15 @@ $(function() {
   bio.display();
 
   quests.display = function() {
+    var formattedHTMLQuestImage;
+    var formattedHTMLQuestName;
+    var formattedHTMLQuest;
+
     for (j=0; j < quests.quests.length; j++) {
-      appendHTML(HTMLquestImage, $quests, quests.quests[j].image);
-      appendHTML(HTMLquestName, $quests, quests.quests[j].name);
+      formattedHTMLQuestImage  = HTMLquestImage.replace("%data%", quests.quests[j].image);
+      formattedHTMLQuestName = HTMLquestName.replace("%data%", quests.quests[j].name);
+      formattedHTMLQuest = formattedHTMLQuestImage + formattedHTMLQuestName;
+      $quests.append(formattedHTMLQuest);
     }
   };
 
