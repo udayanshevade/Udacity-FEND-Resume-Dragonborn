@@ -138,7 +138,7 @@
 }
 
 .page-content {
-  margin: 1em;
+  margin: 1em auto 4em auto;
   min-height: 100vh;
 }
 
@@ -150,10 +150,25 @@
 }
 
 .dovah-title {
-  margin: 0 auto;
+  margin: 0 auto 1em auto;
   font: 1.5em "Dragon", sans-serif;
   text-align: center;
   color: #222;
+}
+
+.quests {
+  text-align: center;
+}
+
+.quest-image {
+  margin: 1em auto 0 auto;
+  width: 240px;
+}
+
+.quest-name {
+  font: 600 1.5em "Dosis", sans-serif;
+  text-transform: uppercase;
+  margin: 0.5em auto 1em auto;
 }
 
 /* Responsive */

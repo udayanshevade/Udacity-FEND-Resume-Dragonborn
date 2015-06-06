@@ -11,6 +11,7 @@ $(function() {
   }
 
   var $introMenu = $('.intro-menu');
+  var $quests = $('.quests');
 
   var bio = {
     'name' : 'Dragonborn',
@@ -19,7 +20,41 @@ $(function() {
       'Dragon of the North',
       'Adventurer',
     ]
-  }
+  };
+
+  var quests = {
+    quests:
+    [
+      {
+        'name' : 'Dragonslayer',
+        'image' : 'img/dragonslayer.png'
+      },
+      {
+        'name' : 'Harbinger',
+        'image' : 'img/harbinger.png'
+      },
+      {
+        'name' : 'Arch Mage',
+        'image' : 'img/archmage.png'
+      },
+      {
+        'name' : 'Thief',
+        'image' : 'img/thief.png'
+      },
+      {
+        'name' : 'Listener',
+        'image' : 'img/listener.png'
+      },
+      {
+        'name' : 'Hero of Skyrim',
+        'image' : 'img/hero.png'
+      },
+      {
+        'name' : 'Hero of the People',
+        'image' : 'img/beloved.png'
+      },
+    ]
+  };
 
   bio.display = function() {
     for (i=0; i < bio.role.length; i++) {
@@ -29,6 +64,15 @@ $(function() {
   };
 
   bio.display();
+
+  quests.display = function() {
+    for (j=0; j < quests.quests.length; j++) {
+      appendHTML(HTMLquestImage, $quests, quests.quests[j].image);
+      appendHTML(HTMLquestName, $quests, quests.quests[j].name);
+    }
+  };
+
+  quests.display();
 
 
   //Handles the navigation scroll
