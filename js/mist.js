@@ -3,7 +3,7 @@ $(function() {
     var particles = [];
 
     // The amount of particles to render
-    var particleCount = 30;
+    var particleCount = 25;
 
     // The maximum velocity in each direction
     var maxVelocity = 1.5;
@@ -58,7 +58,7 @@ $(function() {
         this.yVelocity = 0;
 
         // Set the radius
-        this.radius = 5;
+        this.radius = 4;
 
         // Store the context which will be used to draw the particle
         this.context = context;
@@ -155,14 +155,14 @@ $(function() {
             }
         }
         else {
-            alert("Please use a modern browser");
+            return;
         }
     }
 
     // The function to draw the scene
-    function draw() {
+    function drawMist() {
         // Clear the drawing surface and fill it with a black background
-        context.fillStyle = "rgba(0, 0, 0, 1)";
+        context.fillStyle = "rgba(0, 0, 0, 0.98)";
         context.fillRect(0, 0, canvasWidth, canvasHeight);
 
         // Go through all of the particles and draw them.
@@ -188,7 +188,7 @@ $(function() {
             update();
 
             // Draw the scene
-            draw();
+            drawMist();
         }, 1000 / targetFPS);
     }
 });

@@ -3,6 +3,7 @@
   margin: -0.5em;
   display: flex;
   flex-flow: row wrap;
+  text-align: center;
 }
 
 .col-1 {
@@ -143,6 +144,10 @@
   border: 5px solid #333;
 }
 
+.page-content:last-child {
+  margin: 3em auto 0.5em auto;
+}
+
 .page-title {
   margin: 1em auto 0 auto;
   font: 500 2em "Dosis", sans-serif;
@@ -157,30 +162,29 @@
   color: #222;
 }
 
-.quests {
-  text-align: center;
-}
-
-.quest-entry {
+.modal-entry {
   margin: 2em auto;
   opacity: 0.6;
   transition: opacity 0.3s;
   cursor: pointer;
 }
 
-.quest-image {
+.modal-image {
   margin: 1em auto 0 auto;
-  width: 240px;
+  width: 100%;
+  max-width: 240px;
+  cursor: pointer;
 }
 
-.quest-entry:hover {
+.modal-entry:hover {
   opacity: 1;
 }
 
-.quest-name {
+.modal-name {
   font: 600 1.5em "Dosis", sans-serif;
   text-transform: uppercase;
   margin: 0.5em auto 1em auto;
+  text-align: center;
 }
 
 .modal-link {
@@ -188,7 +192,7 @@
   color: #000;
 }
 
-.quest-modal {
+.modal {
   background-color: rgba(255,255,255, 0.5);
   position: fixed;
   left: 0;
@@ -211,7 +215,7 @@
   height: 100%;
 }
 
-.quest-modal-content {
+.modal-content {
   background-color: #000;
   color: #fff;
   width: 80%;
@@ -223,12 +227,12 @@
   text-align: center;
 }
 
-.quest-location {
+.modal-location {
   font: 300 1.35em "Dosis", sans-serif;
   text-transform: uppercase;
 }
 
-.quest-description {
+.modal-description {
   padding: 2em;
   margin: auto;
   max-width: 500px;
@@ -248,9 +252,45 @@
   background-color: #888;
 }
 
+.skills-modal-entry {
+  margin: 2em auto;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+.skills-modal-entry:hover {
+  opacity: 1;
+}
+
+.skills-section-title {
+  font: 400 1.75em "Dosis", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin: 1em auto 0.5em auto;
+}
+
+.skills-note {
+  font: 300 1.25em "Dosis", sans-serif;
+}
+
 .skills-section {
   height: 50%;
   min-height: 400px;
+}
+
+.slick-track {
+  background-color: #eee;
+}
+
+.skill-proficiency {
+  font: 300 1.6em "Dosis", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.map-section {
+  height: 100%;
 }
 
 /* Responsive */
@@ -286,8 +326,11 @@
 }
 
 @media screen and (min-width: 600px) {
-  .quest-entry {
+  .modal-entry {
     width: 50%;
+  }
+  .slick-track {
+    background-color: #fff;
   }
 }
 
@@ -314,7 +357,7 @@
   .dovah-title {
     font-size: 2.75em;
   }
-  .quest-entry {
+  .modal-entry {
     width: 33.33%;
   }
 }
