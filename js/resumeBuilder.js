@@ -163,41 +163,41 @@ $(function() {
     ],
     "combat": [
       {
-      "name": "archery",
-      "proficiency": "Master",
-      "level": 100,
-      "description": "The art of using bows and arrows. Archery is one of the six skills of the Warrior Archetype and enhances long-distance combat.",
-      "image": "img/archery.png"
+        "name": "archery",
+        "proficiency": "Master",
+        "level": 100,
+        "description": "The art of using bows and arrows. Archery is one of the six skills of the Warrior Archetype and enhances long-distance combat.",
+        "image": "img/archery.png"
       },
       {
-      "name": "one-handed",
-      "proficiency": "Adept",
-      "level": 90,
-      "description": "The art of wielding light weapons. One-handed is one of the six skills of the Warrior Archetype and enhances close-range combat and dual-wielding.",
-      "image": "img/onehanded.png"
+        "name": "one-handed",
+        "proficiency": "Adept",
+        "level": 90,
+        "description": "The art of wielding light weapons. One-handed is one of the six skills of the Warrior Archetype and enhances close-range combat and dual-wielding.",
+        "image": "img/onehanded.png"
       }
     ],
     "tactical": [
       {
-      "name": "light armor",
-      "proficiency": "Adept",
-      "level": 75,
-      "description": "The capacity to wear effective armor. Light armor is one of the six skills of the Thief Archetype and enhances the ability to carry weight and wear lighter armor.",
-      "image": "img/lightarmor.png"
+        "name": "light armor",
+        "proficiency": "Adept",
+        "level": 75,
+        "description": "The capacity to wear effective armor. Light armor is one of the six skills of the Thief Archetype and enhances the ability to carry weight and wear lighter armor.",
+        "image": "img/lightarmor.png"
       },
       {
-      "name": "sneak",
-      "proficiency": "Master",
-      "level": 100,
-      "description": "The art of moving unseen and unheard. Sneak is one of the six skills of the Thief Archetype and enhances the ability to carry out missions unnoticed.",
-      "image": "img/sneak.png"
+        "name": "sneak",
+        "proficiency": "Master",
+        "level": 100,
+        "description": "The art of moving unseen and unheard. Sneak is one of the six skills of the Thief Archetype and enhances the ability to carry out missions unnoticed.",
+        "image": "img/sneak.png"
       },
       {
-      "name": "lockpicking",
-      "proficiency": "Apprentice",
-      "level": 50,
-      "description": "The ability to open locked doors and containers. Lockpicking is one of the six skills of the Thief Archetype and enhances breaking open mechanical seals.",
-      "image": "img/lockpicking.png"
+        "name": "lockpicking",
+        "proficiency": "Apprentice",
+        "level": 50,
+        "description": "The ability to open locked doors and containers. Lockpicking is one of the six skills of the Thief Archetype and enhances breaking open mechanical seals.",
+        "image": "img/lockpicking.png"
       }
     ],
     "shouts": [
@@ -455,7 +455,7 @@ $(function() {
         "name" : "Whiterun",
         "xPos" : 10,
         "yPos" : 10,
-        "description" : "Home of the ancient Skyforge, the Tree of Kynareth, the famous Cloud District and the great Dragonsreach. Situated at the heart of Skyrim, there is no doubt this city has immense cultural and political importance."
+        "description" : "Home of the ancient Skyforge, the Tree of Kynareth, the famous Cloud District and the great Dragonsreach. Situated at the heart of Skyrim, there is no doubt this city has immense cultural and political importance.",
       },
     "falkreath" :
       {

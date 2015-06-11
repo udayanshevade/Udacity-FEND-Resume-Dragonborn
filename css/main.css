@@ -289,8 +289,20 @@
   text-transform: uppercase;
 }
 
-.map-section {
+.contact {
   height: 100%;
+}
+
+.map-section {
+  height: 500px;
+}
+
+#map-canvas {
+  margin: auto;
+  height: 500px;
+  width: 900px;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 /* Responsive */

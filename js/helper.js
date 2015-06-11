@@ -23,7 +23,7 @@ var HTMLskillsModalImage = '<div class="skills-modal-entry"><img class="modal-im
 var HTMLmodalProficiency = '<div class="%data%"><h3 class="skill-proficiency">%data%</h3></div>';
 
 // Courier Page
-var HTMLmap = '<div id="map"></div>';
+var HTMLmap = '<div id="map-canvas"></div>';
 
 /*
 The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
@@ -44,16 +44,102 @@ function replaceAll(string, find, replace) {
   return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
 
-  function idFyName(item) {
-    item = replaceAll(item.toLowerCase(), " ", "-");
-    item = replaceAll(item, "'", "")
-    return item;
+function idFyName(item) {
+  item = replaceAll(item.toLowerCase(), " ", "-");
+  item = replaceAll(item, "'", "")
+  return item;
+}
+
+function placeMarker(location) {
+  var marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+}
+
+
+function locationFinder() {
+
+  // initializes an empty array
+  var locations = [];
+  var uniqueLocations = [];
+
+  // adds the single location property from bio to the locations array
+  //locations.push(idFyName(bio.contacts.location));
+
+  // iterates through school locations and appends each location to
+  // the locations array
+  for (var quest in quests.quests) {
+    locations.push(idFyName(quests.quests[quest].location));
+  }
+
+  // iterates through work locations and appends each location to
+  // the locations array
+  for (var goal in goals.goals) {
+    locations.push(idFyName(goals.goals[goal].location));
+  }
+
+  uniqueLocations = locations.filter(function(item, i, ar) {
+    return ar.indexOf(item) === i;
+  });
+
+  return uniqueLocations;
+}
+
+function markCities() {
+  for (var city in cities) {
+    var srcStem = "img/places/";
+    var srcCity = city + ".svg";
+    var src = srcStem + srcCity;
+
+  var cityMarker = new google.maps.Marker({
+      map: map,
+      icon: src,
+      optimized: false,
+      position: new google.maps.LatLng(city.xPos,city.yPos),
+      title: city.name
+    });
+  }
+
+  var infoWindow = new google.maps.InfoWindow({
+    content: '<div class="info-window"><h4 class="place-title">' + city.name + '<p class="place-description">' + city.description + '</p></div>'
+  });
+}
+
+function createMapMarker(placeData) {
+  var srcMarker = "img/places/marker.png";
+  var loc = places.placeData;
+  var lat = loc.yPos;  // latitude from the place service
+  var lon = loc.xPos;  // longitude from the place service
+  var name = loc.name;   // name of the place from the place service
+
+  // marker is an object with additional data about the pin for a single location
+  var marker = new google.maps.Marker({
+    map : map,
+    icon : srcMarker,
+    position: new google.maps.LatLng(placeData.xPos, placeData.yPos),
+    title: placeData.name
+  });
+
+  // infoWindows are the little helper windows that open when you click
+  // or hover over a pin on a map. They usually contain more information
+  // about a location.
+  var infoWindow = new google.maps.InfoWindow({
+    content: '<div class="info-window"><h4 class="place-title">' + placeData.name + '<p class="place-description">' + placeData.description + '</p></div>'
+  });
+
+  // opens infoWindow at selected marker
+  /*google.maps.event.addListener(marker, 'click', function() {
+    infoWindow.open(map, this);
+  });*/
 }
 
 /*
 This is the fun part. Here's where we generate the custom Google Map for the website.
-See the documentation below for more details.
+See the ****  DOCUMENTATION  ***** below for more details.
+!!!!!!
 https://developers.google.com/maps/documentation/javascript/reference
+!!!!!!
 */
 var map;    // declares a global map variable
 
@@ -135,24 +221,31 @@ function initialize() {
       var numTiles = 1 << zoom;
 
       // Don't wrap tiles vertically.
-      if (coord.y < 0 || coord.y >= numTiles) {
+
+      var y = ((coord.y % numTiles) + numTiles) % numTiles;
+
+      if (y < 0 || y >= numTiles) {
         return null;
       }
 
       // Wrap tiles horizontally.
       var x = ((coord.x % numTiles) + numTiles) % numTiles;
 
+      if (x < 0 || x >= numTiles) {
+        return null;
+      }
+
       // For simplicity, we use a tileset consisting of 1 tile at zoom level 0
       // and 4 tiles at zoom level 1. Note that we set the base URL to a
       // relative directory.
-      var baseURL = 'img/';
-      baseURL += 'gall-peters_' + zoom + '_' + x + '_' + coord.y + '.png';
+      var baseURL = 'img/map-tiles/';
+      baseURL += 'gall-peters_' + zoom + '_' + coord.x + '_' + coord.y + '.png';
       return baseURL;
     },
-    tileSize: new google.maps.Size(800, 512),
+    tileSize: new google.maps.Size(256, 256),
     isPng: true,
-    minZoom: 0,
-    maxZoom: 0,
+    minZoom: 2,
+    maxZoom: 2,
     name: 'Gall-Peters'
   });
 
@@ -160,115 +253,46 @@ function initialize() {
 
   var mapOptions = {
     zoom: 0,
+    backgroundColor: '#ddd',
     disableDefaultUI : true,
     scrollwheel: false,
-    center: new google.maps.LatLng(0,0),
-    mapTypeControlOptions: {
-      mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'gallPetersMap']
-    }
+    center: new google.maps.LatLng(12,-56),
+    mapTypeControl: false
   };
 
-  map = new google.maps.Map(document.getElementsByClassName('map-section'),
+  map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
 
   map.mapTypes.set('gallPetersMap', gallPetersMapType);
   map.setMapTypeId('gallPetersMap');
-
-  function placeMarker(location) {
-    var marker = new google.maps.Marker({
-        position: location,
-        map: map
-      });
-  }
-
-
-  function locationFinder() {
-
-    // initializes an empty array
-    var locations = [];
-    var uniqueLocations = [];
-
-    // adds the single location property from bio to the locations array
-    //locations.push(idFyName(bio.contacts.location));
-
-    // iterates through school locations and appends each location to
-    // the locations array
-    for (var quest in quests.quests) {
-      locations.push(idFyName(quests.quests[quest].location));
-    }
-
-    // iterates through work locations and appends each location to
-    // the locations array
-    for (var goal in goals.goals) {
-      locations.push(idFyName(goals.goals[goal].location));
-    }
-
-    uniqueLocations = locations.filter(function(item, i, ar) {
-      return ar.indexOf(item) === i;
-    });
-
-    return uniqueLocations;
-  }
-
-  function createMapMarker(placeData) {
-    var loc = places.placeData;
-    var lat = loc.yPos;  // latitude from the place service
-    var lon = loc.xPos;  // longitude from the place service
-    var name = loc.name;   // name of the place from the place service
-    var bounds = window.mapBounds;            // current boundaries of the map window
-
-    // marker is an object with additional data about the pin for a single location
-    var marker = new google.maps.Marker({
-      map: map,
-      position: placeData.geometry.location,
-      title: name,
-
-    });
-
-    // infoWindows are the little helper windows that open when you click
-    // or hover over a pin on a map. They usually contain more information
-    // about a location.
-    var infoWindow = new google.maps.InfoWindow({
-      content: name
-    });
-
-    // opens infoWindow at selected marker
-    google.maps.event.addListener(marker, 'click', function() {
-      infoWindow.open(map, this);
-    });
-
-        // this is where the pin actually gets added to the map.
-    // bounds.extend() takes in a map location object
-    bounds.extend(new google.maps.LatLng(lat, lon));
-    // fit the map to the new marker
-    map.fitBounds(bounds);
-    // center the map
-    map.setCenter(bounds.getCenter());
-  }
 
 
   /*
   callback(results, status) makes sure the search returned results for a location.
   If so, it creates a new map marker for that location.
   */
-  function callback(results) {
-    createMapMarker(results[0]);
-  }
 
-
-  function fetchCoords(loc) {
-    console.log(loc);
-    var x = places[loc].xPos;
-    var y = places[loc].yPos;
-    console.log(x,y);
-  }
+  markCities();
 
   // locations is an array of location strings returned from locationFinder()
   locationsArray = locationFinder();
 
-  for (var i =0; i<locationsArray.length; i++) {
-    fetchCoords(locationsArray[i]);
-  }
+
+  // bounds.extend() takes in a map location object
+  var bounds = new google.maps.LatLngBounds(
+    new google.maps.LatLng(-100, -200),
+    new google.maps.LatLng(40, 40)
+  );
+
+  var lastCenter = map.getCenter();
+
+  google.maps.event.addListener(map, 'center_changed', function() {
+    if (bounds.contains(map.getCenter())) {
+      lastCenter = map.getCenter();
+      return;
+    }
+    map.panTo(lastCenter);
+  });
 
 }
 
