@@ -50,14 +50,6 @@ function idFyName(item) {
   return item;
 }
 
-function placeMarker(location) {
-  var marker = new google.maps.Marker({
-      position: location,
-      map: map
-    });
-}
-
-
 function locationFinder() {
 
   // initializes an empty array
@@ -87,52 +79,68 @@ function locationFinder() {
 }
 
 function markCities() {
+  var srcBase = "img/places/";
+  var ext = ".svg";
   for (var city in cities) {
-    var srcStem = "img/places/";
-    var srcCity = city + ".svg";
-    var src = srcStem + srcCity;
+    var src = srcBase + city + ext;
 
-  var cityMarker = new google.maps.Marker({
-      map: map,
-      icon: src,
-      optimized: false,
-      position: new google.maps.LatLng(city.xPos,city.yPos),
-      title: city.name
-    });
+    var cityMarker = new google.maps.Marker({
+        map: map,
+        icon: src,
+        optimized: false,
+        position: new google.maps.LatLng(cities[city].yPos,cities[city].xPos),
+        title: city.name,
+      });
+
+  cityMarker.setZIndex(google.maps.Marker.MAX_ZINDEX + 10);
+
+  var cityInfoWindow = new google.maps.InfoWindow({
+    content: '<div class="info-window"><h4 class="place-title">' + cities[city].name + '<p class="place-description">' + cities[city].description + '</p></div>'
+  });
+
   }
 
-  var infoWindow = new google.maps.InfoWindow({
-    content: '<div class="info-window"><h4 class="place-title">' + city.name + '<p class="place-description">' + city.description + '</p></div>'
+  google.maps.event.addListener(cityMarker, 'click', function() {
+      cityInfoWindow.open(map, this);
   });
 }
 
-function createMapMarker(placeData) {
-  var srcMarker = "img/places/marker.png";
-  var loc = places.placeData;
-  var lat = loc.yPos;  // latitude from the place service
-  var lon = loc.xPos;  // longitude from the place service
-  var name = loc.name;   // name of the place from the place service
+function createMapMarker(placeData, type) {
+  if (type === "cities") {
+    var p = cities[placeData];
+    var ext = ".svg";
+  }
+  else {
+    var p = places[placeData];
+    var ext = ".png";
+  }
 
-  // marker is an object with additional data about the pin for a single location
+  var srcBase = "/img/places/";
   var marker = new google.maps.Marker({
-    map : map,
-    icon : srcMarker,
-    position: new google.maps.LatLng(placeData.xPos, placeData.yPos),
-    title: placeData.name
+    map: map,
+    icon: src,
+    optimized: false,
+    position: new google.maps.LatLng(p.yPos, p.xPos),
+    title: p.name,
   });
 
-  // infoWindows are the little helper windows that open when you click
-  // or hover over a pin on a map. They usually contain more information
-  // about a location.
-  var infoWindow = new google.maps.InfoWindow({
-    content: '<div class="info-window"><h4 class="place-title">' + placeData.name + '<p class="place-description">' + placeData.description + '</p></div>'
+  marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 10);
+
+  var InfoWindow = new google.maps.InfoWindow({
+    content: '<div class="info-window"><h4 class="place-title">' + p.name + '<p class="place-description">' + p.description + '</p></div>'
   });
+
+      // this is where the pin actually gets added to the map.
+    // bounds.extend() takes in a map location object
+  //bounds.extend(new google.maps.LatLng(p.yPos, p.xPos));
+
+  }
+
+/*  google.maps.event.addListener(marker, 'click', function() {
+      InfoWindow.open(map, this);
+  });*/
 
   // opens infoWindow at selected marker
-  /*google.maps.event.addListener(marker, 'click', function() {
-    infoWindow.open(map, this);
-  });*/
-}
 
 /*
 This is the fun part. Here's where we generate the custom Google Map for the website.
@@ -218,20 +226,14 @@ function initialize() {
 
   var gallPetersMapType = new google.maps.ImageMapType({
     getTileUrl: function(coord, zoom) {
-      var numTiles = 1 << zoom;
+      var xTiles = 7;
+      var yTiles = 5;
 
-      // Don't wrap tiles vertically.
-
-      var y = ((coord.y % numTiles) + numTiles) % numTiles;
-
-      if (y < 0 || y >= numTiles) {
+      if (coord.x < 0 || coord.x > xTiles) {
         return null;
       }
 
-      // Wrap tiles horizontally.
-      var x = ((coord.x % numTiles) + numTiles) % numTiles;
-
-      if (x < 0 || x >= numTiles) {
+      if (coord.y < 0 || coord.y > yTiles) {
         return null;
       }
 
@@ -244,8 +246,8 @@ function initialize() {
     },
     tileSize: new google.maps.Size(256, 256),
     isPng: true,
-    minZoom: 2,
-    maxZoom: 2,
+    minZoom: 1,
+    maxZoom: 1,
     name: 'Gall-Peters'
   });
 
@@ -256,7 +258,7 @@ function initialize() {
     backgroundColor: '#ddd',
     disableDefaultUI : true,
     scrollwheel: false,
-    center: new google.maps.LatLng(12,-56),
+    center: new google.maps.LatLng(-38,70),
     mapTypeControl: false
   };
 
@@ -272,17 +274,15 @@ function initialize() {
   If so, it creates a new map marker for that location.
   */
 
+  var bounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(-100,-100),
+      new google.maps.LatLng(100, 100)
+  );
+
   markCities();
 
   // locations is an array of location strings returned from locationFinder()
   locationsArray = locationFinder();
-
-
-  // bounds.extend() takes in a map location object
-  var bounds = new google.maps.LatLngBounds(
-    new google.maps.LatLng(-100, -200),
-    new google.maps.LatLng(40, 40)
-  );
 
   var lastCenter = map.getCenter();
 
@@ -291,7 +291,6 @@ function initialize() {
       lastCenter = map.getCenter();
       return;
     }
-    map.panTo(lastCenter);
   });
 
 }

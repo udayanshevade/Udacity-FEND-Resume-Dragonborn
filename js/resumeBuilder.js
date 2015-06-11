@@ -453,8 +453,8 @@ $(function() {
     "whiterun" :
       {
         "name" : "Whiterun",
-        "xPos" : 10,
-        "yPos" : 10,
+        "xPos" : 70,
+        "yPos" : -38,
         "description" : "Home of the ancient Skyforge, the Tree of Kynareth, the famous Cloud District and the great Dragonsreach. Situated at the heart of Skyrim, there is no doubt this city has immense cultural and political importance.",
       },
     "falkreath" :
@@ -467,36 +467,36 @@ $(function() {
     "windhelm" :
       {
         "name" : "Windhelm",
-        "xPos" : 10,
-        "yPos" : 10,
+        "xPos" : 180,
+        "yPos" : -15,
         "description" : ""
       },
     "solitude" :
       {
         "name" : "Solitude",
-        "xPos" : 10,
-        "yPos" : 10,
+        "xPos" : -24,
+        "yPos" : 21,
         "description" : ""
       },
     "morthal" :
       {
         "name" : "Morthal",
-        "xPos" : 10,
-        "yPos" : 10,
+        "xPos" : 8,
+        "yPos" : -2,
         "description" : ""
       },
     "dawnstar" :
       {
         "name" : "Dawnstar",
-        "xPos" : 10,
-        "yPos" : 10,
+        "xPos" : 79,
+        "yPos" : 19,
         "description" : ""
       },
     "markarth" :
       {
         "name" : "Markarth",
-        "xPos" : 10,
-        "yPos" : 10,
+        "xPos" : -131,
+        "yPos" : -32,
         "description" : ""
       },
     "riften" :
@@ -509,8 +509,8 @@ $(function() {
     "winterhold" :
       {
         "name" : "Winterhold",
-        "xPos" : 10,
-        "yPos" : 10,
+        "xPos" : 157,
+        "yPos" : 17,
         "description" : ""
       }
   };
