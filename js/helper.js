@@ -6,7 +6,7 @@ var HTMLintroRole = '<h3 class="intro-role">%data%</h3>';
 
 // Modals
 var HTMLmodalImage = '<div class="col-12 modal-entry"><img class="modal-image" src="%data%" alt="Quest Image">';
-var HTMLmodalName = '<a class="modal-link" href="%data%-modal"><h3 class="modal-name">%data%</h3></a></div>';
+var HTMLmodalName = '<h3 class="modal-tag" data-target="%data%-modal">%data%</h3></div>';
 
 var HTMLmodalStart = '<div class="modal modal-outer modal-invisible" id="%data%-modal"><div class="modal-content">'
 var HTMLmodalTitle = '<h3 class="modal-name">%data%</h3>';
@@ -78,44 +78,22 @@ function locationFinder() {
   return uniqueLocations;
 }
 
-function markCities() {
-  var srcBase = "img/places/";
-  var ext = ".svg";
-  for (var city in cities) {
-    var src = srcBase + city + ext;
-
-    var cityMarker = new google.maps.Marker({
-        map: map,
-        icon: src,
-        optimized: false,
-        position: new google.maps.LatLng(cities[city].yPos,cities[city].xPos),
-        title: city.name,
-      });
-
-  cityMarker.setZIndex(google.maps.Marker.MAX_ZINDEX + 10);
-
-  var cityInfoWindow = new google.maps.InfoWindow({
-    content: '<div class="info-window"><h4 class="place-title">' + cities[city].name + '<p class="place-description">' + cities[city].description + '</p></div>'
-  });
-
-  }
-
-  google.maps.event.addListener(cityMarker, 'click', function() {
-      cityInfoWindow.open(map, this);
-  });
-}
-
 function createMapMarker(placeData, type) {
-  if (type === "cities") {
+  if (type === "city") {
     var p = cities[placeData];
     var ext = ".svg";
+    var marker = placeData;
   }
   else {
     var p = places[placeData];
     var ext = ".png";
+    var marker = "marker";
   }
 
-  var srcBase = "/img/places/";
+  console.log(placeData);
+
+  var srcBase = "img/places/";
+  var src = srcBase + marker + ext;
   var marker = new google.maps.Marker({
     map: map,
     icon: src,
@@ -128,6 +106,10 @@ function createMapMarker(placeData, type) {
 
   var InfoWindow = new google.maps.InfoWindow({
     content: '<div class="info-window"><h4 class="place-title">' + p.name + '<p class="place-description">' + p.description + '</p></div>'
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+      InfoWindow.open(map, this);
   });
 
       // this is where the pin actually gets added to the map.
@@ -275,11 +257,13 @@ function initialize() {
   */
 
   var bounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(-100,-100),
-      new google.maps.LatLng(100, 100)
+      new google.maps.LatLng(-200,-200),
+      new google.maps.LatLng(200, 200)
   );
 
-  markCities();
+  for (var city in cities) {
+    createMapMarker(city, "city")
+  };
 
   // locations is an array of location strings returned from locationFinder()
   locationsArray = locationFinder();

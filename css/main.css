@@ -187,9 +187,8 @@
   text-align: center;
 }
 
-.modal-link {
-  text-decoration: none;
-  color: #000;
+.modal-tag {
+  font: 400 1.25em "Dosis" sans-serif;
 }
 
 .modal {
@@ -299,9 +298,14 @@
 
 #map-canvas {
   margin: auto;
-  height: 500px;
-  width: 900px;
+  height: 600px;
+  width: 1200px;
   max-height: 100%;
+  max-width: 100%;
+}
+
+.info-window {
+  width: 400px;
   max-width: 100%;
 }
 

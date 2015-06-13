@@ -127,10 +127,10 @@ $(function() {
       $quests.append(formattedHTMLmodal);
     }
 
-    // Extract href value and open modal with that id
+    // Extract data-target value and open modal with that id
     $(".modal-entry").each(function() {
       $(this).click(function() {
-        var $modalID = $(this).find(".modal-link").attr("href").split(" ").join("");
+        var $modalID = $(this).find(".modal-tag").attr("data-target").split(" ").join("");
         show($modalID);
       });
     });
@@ -279,9 +279,9 @@ $(function() {
         $skills.append(formattedHTMLmodal);
 
         // d3 skill charts
-        var x = id + "-mastery";
+        var skillMeasure = id + "-mastery";
         var side = 200;
-        var canvas = d3.select("." + x)
+        var canvas = d3.select("." + skillMeasure)
                       .append("svg")
                       .attr("width", side)
                       .attr("height", side);
@@ -305,17 +305,18 @@ $(function() {
     }
 
     // Skills Modals
-
     $(".skills-modal-entry").each(function() {
       $(this).click(function() {
-        var $modalID = $(this).find(".modal-link").attr("href").split(" ").join("");
+        var $modalID = $(this).find(".modal-tag").attr("data-target").split(" ").join("");
         show($modalID);
+        console.log("k");
       });
     });
 
     $(".modal-escape, .modal-outer").click(function() {
       $(".modal-visible").removeClass("modal-visible");
     })
+
   };
 
   skills.display();
@@ -329,25 +330,20 @@ $(function() {
     autoplaySpeed : 2000,
     responsive : [
       {
-        breakpoint : 768,
+        breakpoint : 750,
         settings : {
           arrows : false,
           centerMode: true,
           centerPadding : "40px",
-          autoplay : true,
-          autoplaySpeed : 3000,
-          slidesToShow : 3,
         }
       },
       {
-        breakpoint : 480,
+        breakpoint : 550,
         settings : {
           arrows : false,
           centerMode : true,
           centerPadding : "40px",
           slidesToShow : 1,
-          autoplay: true,
-          autoplaySpeed: 3000,
         }
       }
     ]
@@ -431,10 +427,10 @@ $(function() {
       $goals.append(formattedHTMLmodal);
     }
 
-    // Extract href value and open modal with that id
+    // Extract data-target value and open modal with that id
     $(".modal-entry").each(function() {
       $(this).click(function() {
-        var $modalID = $(this).find(".modal-link").attr("href").split(" ").join("");
+        var $modalID = $(this).find(".modal-tag").attr("data-target").split(" ").join("");
         show($modalID);
       });
     });
@@ -460,8 +456,8 @@ $(function() {
     "falkreath" :
       {
         "name" : "Falkreath",
-        "xPos" : 10,
-        "yPos" : 10,
+        "xPos" : 50,
+        "yPos" : -150,
         "description" : ""
       },
     "windhelm" :
@@ -502,8 +498,8 @@ $(function() {
     "riften" :
       {
         "name" : "Riften",
-        "xPos" : 10,
-        "yPos" : 10,
+        "xPos" : 229,
+        "yPos" : -225,
         "description" : ""
       },
     "winterhold" :
