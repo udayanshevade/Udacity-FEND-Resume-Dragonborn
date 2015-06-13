@@ -228,19 +228,19 @@ function initialize() {
     },
     tileSize: new google.maps.Size(256, 256),
     isPng: true,
-    minZoom: 1,
-    maxZoom: 1,
+    minZoom: 3,
+    maxZoom: 3,
     name: 'Gall-Peters'
   });
 
   gallPetersMapType.projection = new GallPetersProjection();
 
   var mapOptions = {
-    zoom: 0,
+    zoom: 3,
     backgroundColor: '#ddd',
     disableDefaultUI : true,
     scrollwheel: false,
-    center: new google.maps.LatLng(-38,70),
+    center: new google.maps.LatLng(37,-117.4),
     mapTypeControl: false
   };
 
@@ -257,8 +257,8 @@ function initialize() {
   */
 
   var bounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(-200,-200),
-      new google.maps.LatLng(200, 200)
+      new google.maps.LatLng(15,-170),
+      new google.maps.LatLng(75, -60)
   );
 
   for (var city in cities) {
@@ -268,13 +268,17 @@ function initialize() {
   // locations is an array of location strings returned from locationFinder()
   locationsArray = locationFinder();
 
-  var lastCenter = map.getCenter();
+  var lastValidCenter = map.getCenter();
 
   google.maps.event.addListener(map, 'center_changed', function() {
     if (bounds.contains(map.getCenter())) {
-      lastCenter = map.getCenter();
-      return;
+        // still within valid bounds, so save the last valid position
+        lastValidCenter = map.getCenter();
+        return;
     }
+
+    // not valid anymore => return to last valid position
+    map.panTo(lastValidCenter);
   });
 
 }
