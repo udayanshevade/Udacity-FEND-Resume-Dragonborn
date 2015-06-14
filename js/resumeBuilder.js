@@ -421,7 +421,7 @@ $(function() {
       // formatting each goals modal
       formattedHTMLmodalStart = HTMLmodalStart.replace("%data%", (goals.goals[l].name).split(" ").join(""));
       formattedHTMLmodalTitle = HTMLmodalTitle.replace("%data%", goals.goals[l].name);
-      formattedHTMLmodalLocation = HTMLmodalLocation.replace("%data%", quests.quests[l].location);
+      formattedHTMLmodalLocation = HTMLmodalLocation.replace("%data%", goals.goals[l].location);
       formattedHTMLmodalDescription = HTMLmodalDescription.replace("%data%", goals.goals[l].description);
       formattedHTMLmodal = formattedHTMLmodalStart + formattedHTMLmodalTitle + formattedHTMLmodalLocation + formattedHTMLmodalDescription + HTMLmodalEscape;
       $goals.append(formattedHTMLmodal);
@@ -451,7 +451,7 @@ $(function() {
         "name" : "Whiterun",
         "xPos" : -117.4,
         "yPos" : 37,
-        "description" : "Capital of the Whiterun Hold, home to its Jarl, Balgruuf the Greater. Home of Skyforge; the Tree of Kynareth; the famous Cloud District; and the legendary Dragonsreach. Situated in the heart of Skyrim, this city has immense cultural and political importance.",
+        "description" : "Capital of the Whiterun Hold, home to its Jarl, Balgruuf the Greater. Home of Skyforge; the Gildergreen; the famous Cloud District; and the legendary Dragonsreach. Situated in the heart of Skyrim, this city has immense cultural and political importance.",
         "img" : "img/places/whiterun.png"
       },
     "falkreath" :
@@ -524,100 +524,114 @@ $(function() {
     "alduins-wall" :
       {
         "name" : "Alduin's Wall",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -160,
+        "yPos" : 38,
+        "description" : "Skyhaven Temple is the new home of the Blades, an ancient group once dedicated to serving the Emperors and hunting the dragons. Alduin's Wall is a relic depicting the return of Alduin and the prophesies relating to the return of the Dragonborn.",
+        "img" : "img/places/alduins-wall.png"
       },
     "azuras-shrine" :
       {
         "name" : "Azura's Shrine",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -94.75,
+        "yPos" : 52,
+        "description" : "One of several shrines worshipping the Daedric Princes across Skyrim. This one belongs to Azura, Lady of Twilight, and stands towering on a peak in northern Skyrim, overlooking the wintry sea.",
+        "img" : "img/places/azuras-shrine.png"
       },
     "college-of-winterhold" :
       {
         "name" : "College of Winterhold",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -94,
+        "yPos" : 60,
+        "description" : "Proud home of all mages in Skyrim, located along the north coast of Winterhold. Houses an extensive collection of scholarly literature as well as an assortment of arcane wonders in its more elusive catacombs.",
+        "img" : "img/places/college.png"
       },
     "ysgramors-tomb" :
       {
         "name" : "Ysgramor's Tomb",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -97.2,
+        "yPos" : 61.25,
+        "description" : "The resting place of Ysgramor, the first Companion and founder of the First Empire.",
+        "img" : "img/places/ysgramors-tomb.png"
       },
     "twilight-sepulcher" :
       {
         "name" : "Twilight Sepulcher",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -142,
+        "yPos" : 28,
+        "description" : "An ancient Nordic tomb: home to the Ebonmere, Nocturnal's portal to the Evergloam, and the resting place of the Skeleton Key. Inner sanctum to the Nightengales, servants of Nocturnal, chosen from the Thieves Guild.",
+        "img" : "img/places/ebonmere.png"
       },
     "dawnstar-sanctuary" :
       {
         "name" : "Dawnstar Sanctuary",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -115,
+        "yPos" : 59,
+        "description" : "One of the oldest Dark Brotherhood sanctuaries in Skyrim, it is a headquarters for the servants of Sithis to convene and call home.",
+        "img" : "img/places/dawnstar-sanctuary.png"
       },
     "castle-dour" :
       {
         "name" : "Castle Dour",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -143,
+        "yPos" : 56,
+        "description" : "An Imperial Legion outpost in Solitude, home to General Tullius of the Empire, who presides over the Legion.",
+        "img" : "img/places/castle-dour.png"
       },
     "eldergleam-sanctuary" :
       {
         "name" : "Eldergleam Sanctuary",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -89,
+        "yPos" : 34,
+        "description" : "Home of the Eldergleam Tree, a spirit sacred to the goddess Kynareth. Many pilgrims voyage here for blessings. The Gildergreen in Whiterun is an echo of the Eldergleam.",
+        "img" : "img/places/eldergleam.png"
       },
     "frokis-shack" :
       {
         "name" : "Froki's Shack",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -100,
+        "yPos" : 23,
+        "description" : "A small dwelling located on the side of a cliff near Autumnwatch Tower. The remoteness of the location characterizes the Dragonborn's travels.",
+        "img" : "img/places/frokis-shack.png"
       },
     "breezehome" :
       {
         "name" : "Breezehome",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -118.6,
+        "yPos" : 36,
+        "description" : "Home sweet home.",
+        "img" : "img/places/breezehome.png"
       },
     "understone-keep" :
       {
         "name" : "Understone Keep",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -170,
+        "yPos" : 38,
+        "description" : "Like the city of Markarth itself, the keep is Dwemer architecture now appropriated for modern use. Relics of the Dwarven way of life appear throughout the building. It is used by the governors and scholars of Markarth.",
+        "img" : "img/places/understone-keep.png"
       },
     "labyrinthian" :
       {
         "name" : "Labyrinthian",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -125,
+        "yPos" : 45,
+        "description" : "An ancient ruin and resting place of the Staff of Magnus. This maze-like Nordic architecture is full of treacherous creatures and long-forgotten secrets.",
+        "img" : "img/places/labyrinthian.png"
       },
     "temple-of-mara" :
       {
         "name" : "Temple of Mara",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -75.8,
+        "yPos" : 23,
+        "description" : "A beautiful temple in Riften dedicated to Mara, the goddess of love. Considered by some to be a universal goddess, under her blessings new partnerships are formed through marriage here.",
+        "img" : "img/places/mara.png"
       },
     "throat-of-the-world" :
       {
         "name" : "Throat of the World",
-        "xPos" : 10,
-        "yPos" : 10,
-        "description" : ""
+        "xPos" : -109.25,
+        "yPos" : 33.3,
+        "description" : "Home of the Greybeards, monks of an ancient order sworn in complete silence to study the Voice of the Sky. Seven thousand steps above the rest of Skyrim, this is the tallest peak, fabled to be the cradle of humanity. The snow at the summit is said never to melt.",
+        "img" : "img/places/throat-of-the-world.png"
       },
   }
 

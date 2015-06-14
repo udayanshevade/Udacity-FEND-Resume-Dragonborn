@@ -81,16 +81,15 @@ function locationFinder() {
 function createMapMarker(placeData, type) {
   if (type === "city") {
     var p = cities[placeData];
-    var ext = ".svg";
     var marker = placeData;
   }
   else {
     var p = places[placeData];
-    var ext = ".png";
     var marker = "marker";
   }
 
   var srcBase = "img/places/";
+  var ext = ".svg";
   var src = srcBase + marker + ext;
   var marker = new google.maps.Marker({
     map: map,

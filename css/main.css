@@ -292,12 +292,8 @@
   height: 100%;
 }
 
-.map-section {
-  height: 500px;
-}
-
 #map-canvas {
-  margin: auto;
+  margin: 0 auto 5em auto;
   height: 600px;
   width: 1200px;
   max-height: 100%;
