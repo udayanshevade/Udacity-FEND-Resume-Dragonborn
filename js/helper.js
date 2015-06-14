@@ -90,8 +90,6 @@ function createMapMarker(placeData, type) {
     var marker = "marker";
   }
 
-  console.log(placeData);
-
   var srcBase = "img/places/";
   var src = srcBase + marker + ext;
   var marker = new google.maps.Marker({
@@ -105,24 +103,18 @@ function createMapMarker(placeData, type) {
   marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 10);
 
   var InfoWindow = new google.maps.InfoWindow({
-    content: '<div class="info-window"><h4 class="place-title">' + p.name + '<p class="place-description">' + p.description + '</p></div>'
+    content: '<div class="info-window"><h4 class="place-title">' + p.name + '</h4><img class="place-image" alt="Place Image" src="' + p.img + '"><p class="place-description">' + p.description + '</p></div>'
   });
 
   google.maps.event.addListener(marker, 'click', function() {
-      InfoWindow.open(map, this);
+    InfoWindow.open(map, this);
   });
 
-      // this is where the pin actually gets added to the map.
-    // bounds.extend() takes in a map location object
-  //bounds.extend(new google.maps.LatLng(p.yPos, p.xPos));
+  google.maps.event.addListener(map, 'click', function() {
 
-  }
-
-/*  google.maps.event.addListener(marker, 'click', function() {
-      InfoWindow.open(map, this);
-  });*/
-
-  // opens infoWindow at selected marker
+    infoWindow.close(map, this);
+  })
+}
 
 /*
 This is the fun part. Here's where we generate the custom Google Map for the website.
@@ -251,19 +243,18 @@ function initialize() {
   map.setMapTypeId('gallPetersMap');
 
 
-  /*
-  callback(results, status) makes sure the search returned results for a location.
-  If so, it creates a new map marker for that location.
-  */
-
   var bounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(15,-170),
       new google.maps.LatLng(75, -60)
   );
 
   for (var city in cities) {
-    createMapMarker(city, "city")
-  };
+    createMapMarker(city, "city");
+  }
+
+  for (var place in places) {
+    createMapMarker(place, "place");
+  }
 
   // locations is an array of location strings returned from locationFinder()
   locationsArray = locationFinder();

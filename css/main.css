@@ -305,8 +305,23 @@
 }
 
 .info-window {
+  width: 500px;
+  max-width: 100%;
+}
+
+.place-title {
+  font: 500 1.8em "Dosis", sans-serif;
+  text-transform: uppercase;
+}
+
+.place-image {
   width: 400px;
   max-width: 100%;
+}
+
+.place-description {
+  font: 300 1.5em "Dosis", sans-serif;
+  text-align: justify;
 }
 
 /* Responsive */

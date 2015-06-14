@@ -332,7 +332,7 @@ $(function() {
       {
         breakpoint : 750,
         settings : {
-          arrows : false,
+          arrows : true,
           centerMode: true,
           centerPadding : "40px",
         }
@@ -340,7 +340,7 @@ $(function() {
       {
         breakpoint : 550,
         settings : {
-          arrows : false,
+          arrows : true,
           centerMode : true,
           centerPadding : "40px",
           slidesToShow : 1,
@@ -451,63 +451,72 @@ $(function() {
         "name" : "Whiterun",
         "xPos" : -117.4,
         "yPos" : 37,
-        "description" : "Home of the ancient Skyforge, the Tree of Kynareth, the famous Cloud District and the great Dragonsreach. Situated at the heart of Skyrim, there is no doubt this city has immense cultural and political importance.",
+        "description" : "Capital of the Whiterun Hold, home to its Jarl, Balgruuf the Greater. Home of Skyforge; the Tree of Kynareth; the famous Cloud District; and the legendary Dragonsreach. Situated in the heart of Skyrim, this city has immense cultural and political importance.",
+        "img" : "img/places/whiterun.png"
       },
     "falkreath" :
       {
         "name" : "Falkreath",
         "xPos" : -131.1,
         "yPos" : 24,
-        "description" : ""
+        "description" : "Largest habitat in the Falkreath Hold, home to its Jarl, Siddgeir. At one time belonging to the realm of Cyrodiil, it is now included as a major city in the southwest region of Skyrim. Known for its wooded environment and a large graveyard in which both soldiers and civilians are laid to rest.",
+        "img" : "img/places/falkreath.png"
       },
     "windhelm" :
       {
         "name" : "Windhelm",
         "xPos" : -90,
         "yPos" : 43.5,
-        "description" : ""
+        "description" : "A major city to the northeast of Skyrim, capital of Eastmarch Hold and home to its Jarl, Ulfric Stormcloak, who is leader of the Stormclock Rebellion against the Empire. It is the oldest known settlement in Tamriel. Its population is divided by race, as any who are not Nords face severe segregation.",
+        "img" : "img/places/windhelm.png"
       },
     "solitude" :
       {
         "name" : "Solitude",
         "xPos" : -140.9,
         "yPos" : 57,
-        "description" : ""
+        "description" : "Capital of the Haafingar Hold and all of Skyrim. Home of Jarl Elisif the Fair and the late High King Torygg. It is the seat of the Imperial Legion and an awe-inspiring fortress, built on a soaring arch of stone in the mountains high above the mouth of the Karth River. Home of the Bards College in addition to a vibrant society.",
+        "img" : "img/places/solitude.png"
       },
     "morthal" :
       {
         "name" : "Morthal",
         "xPos" : -133,
         "yPos" : 48,
-        "description" : ""
+        "description" : "A small village situated in the marshes of Hjaalmarch, home to its Jarl, Idgrod Ravencrone. The settlement bears an eerie atmosphere due to its proximity to swamplands and houses many modest townspeople.",
+        "img" : "img/places/morthal.png"
       },
     "dawnstar" :
       {
         "name" : "Dawnstar",
         "xPos" : -115.2,
         "yPos" : 56.5,
-        "description" : ""
+        "description" : "Capital of the Pale Hold as well, and one of the major cities of Skyrim. Situated along the northern coast of Skyrim, it serves as a garrison town, governed by Jarl Skald the Elder. It is home to a small, thriving community, despite having an even colder climate than the other regions.",
+        "img" : "img/places/dawnstar.png"
       },
     "markarth" :
       {
         "name" : "Markarth",
         "xPos" : -167.7,
         "yPos" : 38,
-        "description" : ""
+        "description" : "One of the largest cities in The Reach, to the west of Skyrim, and home to its Jarl Igmund. Partly, a former Dwarven Ruin, the city is now populated by merchants, traders and politicians. It is known for its Dwemer archaeological presence and mining community. A growing restless community of the Forsworn encroach on the city.",
+        "img" : "img/places/markarth.png"
       },
     "riften" :
       {
         "name" : "Riften",
         "xPos" : -78,
         "yPos" : 23.2,
-        "description" : ""
+        "description" : "A sprawling and corrupted city, governed by businesswoman Maven Black-Briar more than its figurehead Jarl Laila Law-Giver. The city is located in the southeast of Skyrim, on the edge of Lake Honrich. Its architecture is built around the presence of naval trade. Riften is a thriving source of commerce and home of the infamous Thieves' Guild.",
+        "img" : "img/places/riften.png"
       },
     "winterhold" :
       {
         "name" : "Winterhold",
         "xPos" : -95.75,
         "yPos" : 55.7,
-        "description" : ""
+        "description" : "A former major city in the north of Skyrim, once rivaling Solitude in influence. Capital of the hold of the same name Winterhold now faces economic hardship as a deprecated settlement since the Great Collapse. Home to the College of Winterhold, the proud headquarters of the Mages' Guild in Skyrim.",
+        "img" : "img/places/winterhold.png"
       }
   };
 
