@@ -1,5 +1,4 @@
 // Helper tags
-
 // Intro page
 var HTMLintroName = '<div class="intro-before">Meet the</><h1 class="intro-name">%data%</h1>';
 var HTMLintroRole = '<h3 class="intro-role">%data%</h3>';
@@ -7,7 +6,6 @@ var HTMLintroRole = '<h3 class="intro-role">%data%</h3>';
 // Modals
 var HTMLmodalImage = '<div class="col-12 modal-entry"><img class="modal-image" src="%data%" alt="Quest Image">';
 var HTMLmodalName = '<h3 class="modal-tag" data-target="%data%-modal">%data%</h3></div>';
-
 var HTMLmodalStart = '<div class="modal modal-outer modal-invisible" id="%data%-modal"><div class="modal-content">'
 var HTMLmodalTitle = '<h3 class="modal-name">%data%</h3>';
 var HTMLmodalLocation = '<h4 class="modal-location">[%data%]</h4>';
@@ -20,76 +18,84 @@ var HTMLskillsSectionStart = '<div class="col-12 skills-section %data%"></div>';
 var HTMLtypeTitle = '<h2 class="col-12 skills-section-title">%data%</h2>';
 var HTMLskillsItem = '<div class="skill-item %data%"></div>';
 var HTMLskillsModalImage = '<div class="skills-modal-entry"><img class="modal-image" src="%data%" alt="Skill Image">';
-var HTMLmodalProficiency = '<div class="%data%"><h3 class="skill-proficiency">%data%</h3></div>';
+var HTMLmodalProficiency = '<div class="skill-measure %data%"><h3 class="skill-proficiency">%data%</h3></div>';
 
-// Courier Page
+// Contact Page
 var HTMLmap = '<div id="map-canvas"></div>';
+var HTMLemail = '<li class="contact-detail"><a class="contact-email" href="mailto:%data%?Subject=Re:Give Me Back My Sweet Roll">Email: %data%</a></li>'
+var HTMLfacebook = '<li class="contact-detail"><a class="contact-facebook" href="%data%">Facebook</a></li>';
+var HTMLnumber = '<li class="contact-detail"><a class="contact-number">Phone: %data%</a></li>';
+var HTMLlocation = '<li class="contact-detail courier-message">Or send a courier to any one of these locations:</li>';
+var HTMLbioPic = '<a href="#intro-page" class="bio-pic"><img src="%data%" alt="Helmet Picture"></a>';
 
 /*
 The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
-*/
+NOT USING
 $(document).ready(function() {
   $('button').click(function() {
     var iName = inName($(".headerName")[0].textContent) || function(){};
     $('.headerName').html(iName);
   });
 });
+*/
 
-
+// Used for error prevention in replacing string
 function escapeRegExp(string) {
-  return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+  return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
 }
 
+// Replace all instances of a string match in a string
 function replaceAll(string, find, replace) {
   return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
 
+// Return item as a name suitable for an id (hyphenated, lowercase)
 function idFyName(item) {
-  item = replaceAll(item.toLowerCase(), " ", "-");
-  item = replaceAll(item, "'", "")
+  item = replaceAll(item.toLowerCase(), ' ', '-');
+  item = replaceAll(item, '\'', '')
   return item;
 }
 
+// Grabs all distinct locations from entries in resumeBuilder.js
 function locationFinder() {
 
-  // initializes an empty array
   var locations = [];
   var uniqueLocations = [];
 
-  // adds the single location property from bio to the locations array
-  //locations.push(idFyName(bio.contacts.location));
-
-  // iterates through school locations and appends each location to
-  // the locations array
+  // Iterates through quest locations
   for (var quest in quests.quests) {
     locations.push(idFyName(quests.quests[quest].location));
   }
 
-  // iterates through work locations and appends each location to
-  // the locations array
+  // Iterates through goal locations
   for (var goal in goals.goals) {
     locations.push(idFyName(goals.goals[goal].location));
   }
 
+  // Filters out repeating locations
   uniqueLocations = locations.filter(function(item, i, ar) {
     return ar.indexOf(item) === i;
   });
-
+  // returns individual locations
   return uniqueLocations;
 }
 
+// Array to keep track of info windows
+InfoWindowArray = [];
+
+// Creates map markers with infowindows in fictional google map
 function createMapMarker(placeData, type) {
-  if (type === "city") {
+  if (type === 'city') {
     var p = cities[placeData];
     var marker = placeData;
   }
   else {
     var p = places[placeData];
-    var marker = "marker";
+    var marker = 'marker';
   }
 
-  var srcBase = "img/places/";
-  var ext = ".svg";
+  var srcBase = 'img/places/';
+  var ext = '.svg';
   var src = srcBase + marker + ext;
   var marker = new google.maps.Marker({
     map: map,
@@ -99,20 +105,33 @@ function createMapMarker(placeData, type) {
     title: p.name,
   });
 
-  marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 10);
+  // Custom content for infowindow
+  var InfoWindowContent = '<div class="info-window"><h4 class="place-title">' +
+        p.name +
+        '</h4><img class="place-image" alt="Place Image" src="' +
+        p.img +
+        '"><p class="place-description">' +
+        p.description +
+        '</p></div>';
 
-  var InfoWindow = new google.maps.InfoWindow({
-    content: '<div class="info-window"><h4 class="place-title">' + p.name + '</h4><img class="place-image" alt="Place Image" src="' + p.img + '"><p class="place-description">' + p.description + '</p></div>'
-  });
+  var InfoWindow = new google.maps.InfoWindow({content: InfoWindowContent});
 
+  // Keep track of all infowindows
+  InfoWindowArray.push(InfoWindow);
+
+
+
+  // Listens for user clicking on a marker
   google.maps.event.addListener(marker, 'click', function() {
+    // Cycle through and close all windows first
+    // since later for-loop disallowed single infowindow
+    for (var iwindow = 0; iwindow < InfoWindowArray.length; iwindow++) {
+      InfoWindowArray[iwindow].close();
+    }
+    // open relevant infowindow
     InfoWindow.open(map, this);
   });
 
-  google.maps.event.addListener(map, 'click', function() {
-
-    infoWindow.close(map, this);
-  })
 }
 
 /*
@@ -194,25 +213,20 @@ GallPetersProjection.prototype.fromPointToLatLng = function(point, noWrap) {
 };
 
 function initialize() {
-
   var locations;
-
   var gallPetersMapType = new google.maps.ImageMapType({
     getTileUrl: function(coord, zoom) {
+
+      // Limits tile count, prevents 404 errors loading nonexistent tiles
       var xTiles = 7;
       var yTiles = 5;
-
       if (coord.x < 0 || coord.x > xTiles) {
         return null;
       }
-
       if (coord.y < 0 || coord.y > yTiles) {
         return null;
       }
 
-      // For simplicity, we use a tileset consisting of 1 tile at zoom level 0
-      // and 4 tiles at zoom level 1. Note that we set the base URL to a
-      // relative directory.
       var baseURL = 'img/map-tiles/';
       baseURL += 'gall-peters_' + zoom + '_' + coord.x + '_' + coord.y + '.png';
       return baseURL;
@@ -244,30 +258,33 @@ function initialize() {
 
   var bounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(15,-170),
-      new google.maps.LatLng(75, -60)
+      new google.maps.LatLng(85, -60)
   );
 
-  for (var city in cities) {
-    createMapMarker(city, "city");
-  }
-
-  for (var place in places) {
-    createMapMarker(place, "place");
-  }
-
-  // locations is an array of location strings returned from locationFinder()
   locationsArray = locationFinder();
 
+  // Add places visited map markers
+  for (var location = 0; location<locationsArray.length; location++) {
+    var place = locationsArray[location];
+    createMapMarker(place, 'visited');
+  }
+
+  // Add city markers
+  for (var city in cities) {
+    createMapMarker(city, "city")
+  }
+
+  // Defines origin for map auto reset
   var lastValidCenter = map.getCenter();
 
   google.maps.event.addListener(map, 'center_changed', function() {
     if (bounds.contains(map.getCenter())) {
-        // still within valid bounds, so save the last valid position
+        // defines current center for map auto reset
         lastValidCenter = map.getCenter();
         return;
     }
 
-    // not valid anymore => return to last valid position
+    // else, out of bounds... return to last valid position
     map.panTo(lastValidCenter);
   });
 
