@@ -1,3 +1,5 @@
+/* Grid */
+
 .row {
   max-width: 100vw;
   margin: -0.5em;
@@ -54,10 +56,14 @@
   width: 100%;
 }
 
+/* Font */
+
 @font-face{
   font-family: "Dragon";
   src: url(../font/dragon-alphabet.ttf);
 }
+
+/* Intro Page */
 
 .intro {
   background-color: #000;
@@ -138,6 +144,8 @@
   color: #fff;
 }
 
+/* General - Body */
+
 .page-content {
   margin: 4em auto 5em auto;
   min-height: 100vh;
@@ -162,7 +170,10 @@
   color: #222;
 }
 
+/* General - Modals */
+
 .modal-entry {
+  background-color: #eee;
   margin: 2em auto;
   opacity: 0.6;
   transition: opacity 0.3s;
@@ -177,10 +188,13 @@
 }
 
 .modal-entry:hover {
+  z-index: 4;
+  outline: 5px solid black;
   opacity: 1;
 }
 
 .modal-name {
+  display: inline-block;
   font: 600 1.5em "Dosis", sans-serif;
   text-transform: uppercase;
   margin: 0.5em auto 1em auto;
@@ -188,7 +202,8 @@
 }
 
 .modal-tag {
-  font: 400 1.25em "Dosis" sans-serif;
+  font: 400 1.25em "Dosis", sans-serif;
+  text-transform: capitalize;
 }
 
 .modal {
@@ -251,6 +266,8 @@
   background-color: #888;
 }
 
+/* Skills Slider Modals */
+
 .skills-modal-entry {
   margin: 2em auto;
   opacity: 0.6;
@@ -278,8 +295,18 @@
   min-height: 400px;
 }
 
+.slick-slide {
+  text-align: center;
+}
+
 .slick-track {
   background-color: #eee;
+}
+
+.slick-next,
+.slick-prev {
+  margin: 0.5em;
+  font-size: 5em;
 }
 
 .skill-proficiency {
@@ -288,12 +315,19 @@
   text-transform: uppercase;
 }
 
+.skill-measure-text {
+  font: 400 1.5em "Dosis", sans-serif;
+  color: #fff;
+}
+
+/* Contact/Map Page */
+
 .contact {
   height: 100%;
 }
 
 #map-canvas {
-  margin: 0 auto 5em auto;
+  margin: 0 auto 2em auto;
   height: 600px;
   width: 1200px;
   max-height: 100%;
@@ -317,7 +351,66 @@
 
 .place-description {
   font: 300 1.5em "Dosis", sans-serif;
-  text-align: justify;
+  text-align: center;
+}
+
+.dovah-title:last-child {
+  margin-bottom: 0;
+}
+
+.contact-details {
+  margin: 0 auto 1em auto;
+}
+
+.contact-details-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.contact-detail {
+  font: 300 1.6em "Dosis", sans-serif;
+}
+
+.contact-email,
+.contact-facebook,
+.contact-number {
+  color: #000;
+  text-decoration: none;
+}
+
+.contact-email:hover,
+.contact-email:visited,
+.contact-facebook:hover,
+.contact-facebook:visited,
+.contact-number:hover {
+  color: #000;
+}
+
+.courier-message {
+  font: 1.75em "Dosis", sans-serif;
+}
+
+.audio {
+  margin: 1em auto 0 auto;
+}
+
+.audio-notice {
+  font: 1.25em "Dosis", sans-serif;
+}
+
+.audio-player {
+  width: 300px;
+  margin: 0.5em auto;
+}
+
+.to-top {
+  color: #000;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.bio-pic {
+  margin: auto;
 }
 
 /* Responsive */
@@ -356,6 +449,9 @@
   .modal-entry {
     width: 50%;
   }
+  .modal-tag {
+    font-size: 1.8em;
+  }
   .slick-track {
     background-color: #fff;
   }
@@ -374,6 +470,9 @@
   }
   .intro-menu-link:hover {
     font-size: 1.95em;
+  }
+  .to-top:hover {
+    font-size: 1.7em;
   }
   .dovahkiin-title {
     font-size: 5em;
