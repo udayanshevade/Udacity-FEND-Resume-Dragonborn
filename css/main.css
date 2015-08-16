@@ -416,74 +416,97 @@
 /* Responsive */
 
 @media screen and (min-width: 500px) {
+
   .intro-before {
     margin: 0 1em;
   }
+
   .intro-name {
     font-weight: 400;
     font-size: 1.75em;
     margin: 0;
   }
+
   .intro-role {
     margin: 0 1.25em;
   }
+
   .intro-menu-link {
     font-size: 1.45em;
     padding: 0 1em;
   }
+
   .intro-menu-link:hover {
     font-size: 1.8em;
   }
+
   .dovahkiin-title {
     font-size: 5em;
   }
+
   .page-title {
     font-size: 3em;
   }
+
   .dovah-title {
     font-size: 2.75em;
   }
+
 }
 
 @media screen and (min-width: 600px) {
+
   .modal-entry {
     width: 50%;
   }
+
   .modal-tag {
     font-size: 1.8em;
   }
+
   .slick-track {
     background-color: #fff;
   }
+
 }
 
 @media screen and (min-width: 1000px) {
+
   .intro-before {
     margin: 0 1em;
   }
+
   .intro-name {
     font-weight: 400;
     font-size: 2.35em;
   }
+
   .intro-menu-link {
     font-size: 1.7em;
   }
+
   .intro-menu-link:hover {
     font-size: 1.95em;
   }
+
   .to-top:hover {
     font-size: 1.7em;
   }
+
   .dovahkiin-title {
     font-size: 5em;
   }
+
   .page-title {
     font-size: 3em;
   }
+
   .dovah-title {
     font-size: 2.75em;
   }
+
   .modal-entry {
     width: 33.33%;
   }
+
 }
