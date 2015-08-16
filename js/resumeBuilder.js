@@ -16,7 +16,7 @@ $(function() {
 
   // Shows content
   function show(attribute) {
-    $modal = $('#' + attribute);
+    var $modal = $('#' + attribute);
     $modal.addClass('modal-visible');
   }
 
@@ -816,7 +816,7 @@ $(function() {
                 'humanity. The snow at the summit is said never to melt.',
         'img' : 'img/places/throat-of-the-world-400.png'
       }
-  }
+  };
 
   $('.map-section').append(HTMLmap);
 

@@ -3,7 +3,7 @@ $(function() {
     var particles = [];
 
     // The amount of particles to render
-    var particleCount = 25;
+    var particleCount = 30;
 
     // The maximum velocity in each direction
     var maxVelocity = 1.5;
