@@ -1,13 +1,16 @@
+"use strict";
+
 $(function() {
+
   // Appends HTML and replaces with information from JSON
   function appendHTML(helperHTML, target, entity) {
-    var formatted = helperHTML.replace('%data%', entity);
+    var formatted = helperHTML.replace(data, entity);
     target.append(formatted);
   }
 
   // Prepends HTML and replaces with information from JSON
   function prependHTML(helperHTML, target, entity) {
-    var formatted = helperHTML.replace('%data%', entity);
+    var formatted = helperHTML.replace(data, entity);
     target.prepend(formatted);
   }
 
@@ -17,11 +20,20 @@ $(function() {
     $modal.addClass('modal-visible');
   }
 
+  var data = '%data%';
   var $introMenu = $('.intro-menu');
   var $quests = $('.quests');
   var $skills = $('.skills');
   var $goals = $('.goals');
   var $contactDetails = $('.contact-details-list');
+
+  // variable assignments for modals
+  var formattedHTMLmodalStart,
+    formattedHTMLmodalTitle,
+    formattedHTMLmodalImage,
+    formattedHTMLmodalLocation,
+    formattedHTMLmodalDescription,
+    formattedHTMLmodal;
 
 
   // Bio JSON and related function
@@ -44,14 +56,17 @@ $(function() {
 
   // Displays information from Bio JSON
   bio.display = function() {
-    for (var i=0; i < bio.role.length; i++) {
+    // store bio roles array length
+    var len = bio.role.length;
+    // iterate through bio roles array and append to header
+    for (var i=0; i < len; i++) {
       prependHTML(HTMLintroRole, $introMenu, bio.role[i]);
     }
     prependHTML(HTMLintroName, $introMenu, bio.name);
-    var HTMLformattedEmail = replaceAll(HTMLemail, '%data%', bio.contacts.email);
-    var HTMLformattedFacebook = HTMLfacebook.replace('%data%', bio.contacts.facebook);
-    var HTMLformattedNumber = HTMLnumber.replace('%data%', bio.contacts.number);
-    var HTMLformattedBioPic = HTMLbioPic.replace('%data%', bio.bioPic);
+    var HTMLformattedEmail = replaceAll(HTMLemail, data, bio.contacts.email);
+    var HTMLformattedFacebook = HTMLfacebook.replace(data, bio.contacts.facebook);
+    var HTMLformattedNumber = HTMLnumber.replace(data, bio.contacts.number);
+    var HTMLformattedBioPic = HTMLbioPic.replace(data, bio.bioPic);
     $contactDetails.append(HTMLformattedEmail);
     $contactDetails.append(HTMLformattedFacebook);
     $contactDetails.append(HTMLformattedNumber);
@@ -129,28 +144,22 @@ $(function() {
 
   // Displays quest info
   quests.display = function() {
-    var formattedHTMLquestImage;
     var formattedHTMLquestName;
     var formattedHTMLquest;
 
-    // variables for each quest modal
-    var formattedHTMLquestModalStart;
-    var formattedHTMLquestModalTitle;
-    var formattedHTMLquestModalLocation;
-    var formattedHTMLquestModalDescription;
-
     // Compiles and formats HTML for each modal
-    for (var j=0; j < quests.quests.length; j++) {
-      formattedHTMLquestImage  = HTMLmodalImage.replace('%data%', quests.quests[j].image);
-      formattedHTMLquestName = replaceAll(HTMLmodalName, '%data%', quests.quests[j].name);
-      formattedHTMLquest = formattedHTMLquestImage + formattedHTMLquestName;
+    var len = quests.quests.length;
+    for (var j=0; j < len; j++) {
+      formattedHTMLmodalImage  = HTMLmodalImage.replace(data, quests.quests[j].image);
+      formattedHTMLquestName = replaceAll(HTMLmodalName, data, quests.quests[j].name);
+      formattedHTMLquest = formattedHTMLmodalImage + formattedHTMLquestName;
       $quests.append(formattedHTMLquest);
 
       // formatting each quest modal
-      formattedHTMLmodalStart = HTMLmodalStart.replace('%data%', (quests.quests[j].name).split(' ').join(''));
-      formattedHTMLmodalTitle = HTMLmodalTitle.replace('%data%', quests.quests[j].name);
-      formattedHTMLmodalLocation = HTMLmodalLocation.replace('%data%', quests.quests[j].location);
-      formattedHTMLmodalDescription = HTMLmodalDescription.replace('%data%', quests.quests[j].description);
+      formattedHTMLmodalStart = HTMLmodalStart.replace(data, (quests.quests[j].name).split(' ').join(''));
+      formattedHTMLmodalTitle = HTMLmodalTitle.replace(data, quests.quests[j].name);
+      formattedHTMLmodalLocation = HTMLmodalLocation.replace(data, quests.quests[j].location);
+      formattedHTMLmodalDescription = HTMLmodalDescription.replace(data, quests.quests[j].description);
       formattedHTMLmodal = formattedHTMLmodalStart + formattedHTMLmodalTitle + formattedHTMLmodalLocation + formattedHTMLmodalDescription + HTMLmodalEscape;
       $quests.append(formattedHTMLmodal);
     }
@@ -298,10 +307,12 @@ $(function() {
 
   // Displays skills info
   skills.display = function() {
-    var formattedHTMLtypeTitle;
-    var formattedHTMLskillsName;
-    var formattedHTMLmodalImage;
-    var formattedHTMLmodalProficiency;
+    var formattedHTMLtypeTitle,
+        formattedHTMLskillName,
+        formattedHTMLskill,
+        formattedHTMLmodalProficiency,
+        typeList;
+
     for (var type in skills) {
       // Ignores display function encapsulated in skills object
       if (type === 'display') {
@@ -309,13 +320,14 @@ $(function() {
       }
       // Forms a list of skills in each type
       if (skills.hasOwnProperty(type)) {
-        typeList = skills[type];
+        var typeList = skills[type];
       }
 
       appendHTML(HTMLtypeTitle, $skills, type);
       appendHTML(HTMLskillsSectionStart, $skills, type);
 
-      for (var skill = 0; skill < typeList.length; skill++) {
+      var len = typeList.length;
+      for (var skill = 0; skill < len; skill++) {
         var thisSkill = typeList[skill];
         var name = thisSkill.name;
         var id = name.split(' ').join('-');
@@ -324,17 +336,17 @@ $(function() {
         var prof = thisSkill.proficiency;
 
         appendHTML(HTMLskillsItem, $('.' + type), id);
-        formattedHTMLmodalImage = HTMLskillsModalImage.replace('%data%', img);
-        formattedHTMLskillName = HTMLmodalName.replace('%data%', id).replace('%data%', name);
+        formattedHTMLmodalImage = HTMLskillsModalImage.replace(data, img);
+        formattedHTMLskillName = HTMLmodalName.replace(data, id).replace(data, name);
         formattedHTMLskill = formattedHTMLmodalImage + formattedHTMLskillName;
         $('.' + id).append(formattedHTMLskill);
 
         // formatting each skill modal
-        formattedHTMLmodalStart = HTMLmodalStart.replace('%data%', id);
-        formattedHTMLmodalTitle = HTMLmodalTitle.replace('%data%', name);
-        formattedHTMLmodalProficiency = HTMLmodalProficiency.replace('%data%', (id + '-mastery')).replace('%data%', prof);
+        formattedHTMLmodalStart = HTMLmodalStart.replace(data, id);
+        formattedHTMLmodalTitle = HTMLmodalTitle.replace(data, name);
+        formattedHTMLmodalProficiency = HTMLmodalProficiency.replace(data, (id + '-mastery')).replace(data, prof);
 
-        formattedHTMLmodalDescription = HTMLmodalDescription.replace('%data%', thisSkill.description);
+        formattedHTMLmodalDescription = HTMLmodalDescription.replace(data, thisSkill.description);
         formattedHTMLmodal = formattedHTMLmodalStart + formattedHTMLmodalTitle + formattedHTMLmodalProficiency + formattedHTMLmodalDescription + HTMLmodalEscape;
         $skills.append(formattedHTMLmodal);
 
@@ -426,7 +438,7 @@ $(function() {
     // hides skill modal content
     $('.modal-escape, .modal-outer').click(function() {
       $('.modal-visible').removeClass('modal-visible');
-    })
+    });
 
   };
 
@@ -493,27 +505,23 @@ $(function() {
     var formattedHTMLname;
     var formattedHTMLselect;
 
-    // variables for each quest modal
-    var formattedHTMLmodalStart;
-    var formattedHTMLmodalTitle;
-    var formattedHTMLmodalLocation;
-    var formattedHTMLmodalDescription;
-
     // Compiles and formats HTML for each modal
-    for (var l=0; l < goals.goals.length; l++) {
-      formattedHTMLimage  = HTMLmodalImage.replace('%data%', goals.goals[l].image);
-      formattedHTMLname = HTMLmodalName.replace('%data%', goals.goals[l].name).replace('%data%', goals.goals[l].name);
+    var len = goals.goals.length;
+    for (var l=0; l < len; l++) {
+      formattedHTMLimage  = HTMLmodalImage.replace(data, goals.goals[l].image);
+      formattedHTMLname = HTMLmodalName.replace(data, goals.goals[l].name).replace(data, goals.goals[l].name);
       formattedHTMLselect = formattedHTMLimage + formattedHTMLname;
       $goals.append(formattedHTMLselect);
 
       // formatting each goals modal
-      formattedHTMLmodalStart = HTMLmodalStart.replace('%data%', (goals.goals[l].name).split(' ').join(''));
-      formattedHTMLmodalTitle = HTMLmodalTitle.replace('%data%', goals.goals[l].name);
-      formattedHTMLmodalLocation = HTMLmodalLocation.replace('%data%', goals.goals[l].location);
-      formattedHTMLmodalDescription = HTMLmodalDescription.replace('%data%', goals.goals[l].description);
+      formattedHTMLmodalStart = HTMLmodalStart.replace(data, (goals.goals[l].name).split(' ').join(''));
+      formattedHTMLmodalTitle = HTMLmodalTitle.replace(data, goals.goals[l].name);
+      formattedHTMLmodalLocation = HTMLmodalLocation.replace(data, goals.goals[l].location);
+      formattedHTMLmodalDescription = HTMLmodalDescription.replace(data, goals.goals[l].description);
       formattedHTMLmodal = formattedHTMLmodalStart + formattedHTMLmodalTitle + formattedHTMLmodalLocation + formattedHTMLmodalDescription + HTMLmodalEscape;
       $goals.append(formattedHTMLmodal);
     }
+
 
     // Extract data-target value and open modal with that id
     $('.modal-entry').each(function() {
