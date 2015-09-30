@@ -1,10 +1,20 @@
 # Udacity-FEND-Resume-Dragonborn
+
+Preview: http://udayanshevade.github.io/Udacity-FEND-Resume-Dragonborn/
+
 Second Project of the Udacity Front End Nanodegree - Resume of the Dragonborn from TES V: Skyrim
 
+Instructions:
+
+1. Open the index.html file in a browser and poke around.
+
+
+Information:
+
 With the help of basic starter code provided by Udacity,
-I cobbled an interactive resume for a fictional character, 
-the Dragonborn from The Elder Scrolls V: Skyrim,
-because the player ends up with a heck of a CV by the end of the game!
+I cobbled together an interactive resume for a fictional character, 
+the Dragonborn from the game, The Elder Scrolls V: Skyrim,
+because the player ends up with a heck of a CV by the end!
 
 The project makes use of:
 
@@ -18,5 +28,11 @@ The project makes use of:
 I referenced this resource for the mist effect: http://jsfiddle.net/jonnyc/Ujz4P/5/
 I adopted the code and made some tweaks after making an effort to understand it.
 My next canvas project uses canvas more intensively.
+
+To do:
+
+- optimize images,
+- canvas animation
+- and performance
 
 Thanks for taking a look at my project!
